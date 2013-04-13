@@ -1,6 +1,7 @@
 # Dead Simple Java Tracer
 
-Prints a text stream of the non-native called methods to standard output.
+Prints a text stream of non-native method entry, return, and exception handling
+events.
 
 I hacked this together because most of the Java method tracers that I found
 online wouldn't build for me (on OS X) or wouldn't work with the latest versions
