@@ -20,23 +20,13 @@ class ClassAdapter extends ClassVisitor {
 
         MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
 
+        String methodSignature = className + "." + name + desc;
+
         if ((access & Opcodes.ACC_ABSTRACT) == 0) {
-            mv.visitFieldInsn(
-                Opcodes.GETSTATIC,
-                "java/lang/System",
-                "out",
-                "Ljava/io/PrintStream;"
-            );
-            mv.visitLdcInsn(className + "." + name + desc);
-            mv.visitMethodInsn(
-                Opcodes.INVOKEVIRTUAL,
-                "java/io/PrintStream",
-                "println",
-                "(Ljava/lang/String;)V"
-            );
+            Util.insertPrintInsns(mv, "Entering " + methodSignature);
         }
 
-        return mv;
+        return new PrintMethodReturnAdapter(mv, methodSignature);
     }
 
 }
