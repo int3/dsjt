@@ -15,7 +15,9 @@ class PrintMethodReturnAdapter extends MethodVisitor {
     public void visitInsn(int opcode) {
         if (opcode == Opcodes.RETURN
                 || opcode == Opcodes.IRETURN
+                || opcode == Opcodes.LRETURN
                 || opcode == Opcodes.ARETURN
+                || opcode == Opcodes.FRETURN
                 || opcode == Opcodes.DRETURN) {
             Util.insertPrintInsns(mv, "Returning from " + methodSignature);
         }
